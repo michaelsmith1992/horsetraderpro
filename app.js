@@ -13,7 +13,7 @@ app.use(express.static('public'))
 app.set('view engine', 'pug')
 
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Hey', message: 'Hello there!' })
+    res.render('index', { title: 'HorseTraderPro - blog post csv to html'})
 });
 
 app.post('/csvtohtml', upload.single('file'), (req, res) => {
