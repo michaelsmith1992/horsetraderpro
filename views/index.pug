@@ -1,0 +1,58 @@
+html
+  head
+    title= title
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous")
+
+  body
+    .container-md.w-50.mt-4
+      h2.mb-4 HorseTraderPro Blog Post - CSV to HTML table
+      select#eventType.form-select.form-control(name='eventType')
+        option(value='dressage') Dressage
+        option(value='jumping') Jumping
+        option(value='eventing') Eventing
+      input.form-control.input.mt-3(id="fileupload" type="file" name="fileupload")
+      .d-flex.mt-3.justify-content-between
+        button.btn.btn-primary.mr-4(id="upload-button" onclick="uploadFile()") Upload
+        a.btn.btn-primary#dressageDownload(href="dressage.csv" download="dressage-templare") Download Dressage Template
+        a.d-none.btn.btn-primary#eventingDownload(href="eventing.csv" download="eventing-templare") Download Eventing Template
+        a.d-none.btn.btn-primary#jumpingDownload(href="jumping.csv" download="jumping-templare") Download Jumping Template
+
+      textarea.form-control.input.mt-3#htmlText(name="htmlText" rows="20")
+
+  script(type="text/javascript").
+    const dressageDownload = document.querySelector("#dressageDownload");
+    const eventingDownload = document.querySelector("#eventingDownload");
+    const jumpingDownload = document.querySelector("#jumpingDownload");
+    const eventType = document.querySelector("#eventType");
+    eventType.addEventListener('change', (event) => {
+      switch(event.target.value) {
+        case "dressage":
+          dressageDownload.classList.remove("d-none");
+          eventingDownload.classList.add("d-none");
+          jumpingDownload.classList.add("d-none");
+          break;
+        case "jumping":
+          jumpingDownload.classList.remove("d-none");
+          eventingDownload.classList.add("d-none");
+          dressageDownload.classList.add("d-none");
+          break;
+        case "eventing":
+          eventingDownload.classList.remove("d-none");
+          jumpingDownload.classList.add("d-none");
+          dressageDownload.classList.add("d-none");
+          break;
+      }
+      result.textContent = `You like ${event.target.value}`;
+    });
+
+    async function uploadFile() {
+        const formData = new FormData();
+        formData.append("file", fileupload.files[0]);
+        const result = await fetch(`/csvtohtml?eventType=${eventType.value}`, {
+          method: "POST",
+          body: formData
+        });
+        const response = await result.json();
+        document.querySelector("#htmlText").innerHTML = response.htmlData;
+    }

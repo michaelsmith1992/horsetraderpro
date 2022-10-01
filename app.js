@@ -1,0 +1,26 @@
+const express = require("express");
+const { convertCsvToHtml } = require("./csvtohtml");
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage() });
+
+
+const app = express();
+
+app.use(express.json());
+
+app.use(express.static('public'))
+
+app.set('view engine', 'pug')
+
+app.get('/', (req, res) => {
+    res.render('index', { title: 'Hey', message: 'Hello there!' })
+});
+
+app.post('/csvtohtml', upload.single('file'), (req, res) => {
+    const result = convertCsvToHtml(req.file.buffer, req.query.eventType);
+    res.send(result);
+});
+
+app.listen(3000, () => {
+    console.log("app is listening on port 3000");
+})
