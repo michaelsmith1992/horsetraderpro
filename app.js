@@ -21,6 +21,4 @@ app.post('/csvtohtml', upload.single('file'), (req, res) => {
     res.send(result);
 });
 
-app.listen(3000, () => {
-    console.log("app is listening on port 3000");
-})
+app.listen(process.env.PORT);
