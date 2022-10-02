@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
     res.render('index', { title: 'HorseTraderPro - blog post csv to html'})
 });
 
+app.get('/howto', (req, res) => {
+    res.render('tutorial', { title: 'HorseTraderPro - blog post csv to html'})
+});
+
 app.post('/csvtohtml', upload.single('file'), (req, res) => {
     const result = convertCsvToHtml(req.file.buffer, req.query.eventType);
     res.send(result);

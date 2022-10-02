@@ -1,0 +1,49 @@
+html
+  head
+    title= title
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous")
+
+  body
+    .container-md.mt-4.d-flex.w-50
+      a(href="/") Tool
+      a.ms-4(href="/howto") How To
+    .container-md.w-50.mt-4
+      h2.mb-4 How to use
+      .alert.alert-secondary
+        | 1. Select event type
+        br
+        | 2. Download the template
+        br
+        | 3. Open up the CSV file in excel
+        br
+        | 4. The text import wizard will open
+        br
+        | 5. Click next on wizard
+        br
+        | 6. On the next page make sure that just "Comma" is checked under the "Delimiters" section and click "Finish" (see images below)
+      img.img-fluid(src="./img/step1.png")
+      img.mt-3.img-fluid(src="./img/step2.png")
+      .alert.alert-secondary.mt-3
+        | 7. Open up&nbsp;
+        a(href="https://data.fei.org/default.aspx" target="_blank") data.fei.org
+        |  in your browser
+        br
+        | 8. Click on the relevant event type
+        br
+        | 9. Highlight the top 50 values in the table and copy
+        br
+        | 10. Paste it into the excel spreadsheet, making sure that you go paste from the 2nd column onwards and click save
+      img.img-fluid(src="./img/step3.png")
+      img.mt-3.img-fluid(src="./img/step4.png")
+      .alert.alert-secondary.mt-3
+        | 11. Click choose file and select the file you just saved
+        br
+        | 12. Click upload
+        br
+        | 13. This will then it will the space below with the html code you can use for the website
+        br
+        | 14. Copy the code on to your clipboard
+        br
+        | 15. On the edit blog post section of the website, click the code view button and paste the paste into the textarea below
+      img.mt-3.img-fluid(src="./img/step5.png")
